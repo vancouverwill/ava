@@ -27,7 +27,11 @@ const run = (type, sanitizers = []) => t => {
 			tty.end();
 			return tty.asBuffer();
 		})
-		.then(buffer => report.assert(t, logFile, buffer, {stripStdIO: true, alsoStripSeparator: true}))
+		.then(buffer => {
+			console.log('buffer.toString()', 'WM 🌊🏄 ☀️️----',buffer.toString())
+			return report.assert(t, logFile, buffer, {stripStdIO: true, alsoStripSeparator: true})
+		}
+		)
 		.catch(t.threw);
 };
 
@@ -35,6 +39,6 @@ const run = (type, sanitizers = []) => t => {
 // test('verbose reporter - failFast run', run('failFast'));
 // test('verbose reporter - second failFast run', run('failFast2'));
 // test('verbose reporter - only run', run('only'));
-test("verbose reporter - timeout run", run("timeout"));
+test("verbose reporter - timeout run", run("timeoutInSingleFile"));
 // test('verbose reporter - watch mode run', run('watch'));
 // test('verbose reporter - typescript', run('typescript', [report.sanitizers.lineEndings]));
